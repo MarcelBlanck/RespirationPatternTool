@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sounds/4390__noisecollector__pongblipf-4.wav</file>
+        <file>sounds/4391__noisecollector__pongblipf-5.wav</file>
+        <file>src/qml/elements/BreathingSimulation.qml</file>
+        <file>src/qml/elements/BreathProgressCircle.qml</file>
+        <file>src/qml/elements/BreathSonification.qml</file>
+        <file>src/qml/elements/BreathTextVisualization.qml</file>
+        <file>src/qml/elements/BreathVolumeVisualization.qml</file>
+        <file>src/qml/views/BreathingFacilitatorView.qml</file>
+        <file>src/qml/views/ScenarioCreationView.qml</file>
+        <file>src/qml/views/SettingsView.qml</file>
+        <file>src/qml/main.qml</file>
+        <file>src/qml/data/Settings.qml</file>
+        <file>qtquickcontrols2.conf</file>
+    </qresource>
+</RCC>
