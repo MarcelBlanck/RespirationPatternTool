@@ -21,9 +21,10 @@ Item {
 
     BreathVolumeVisualization {
         id: breathVolumeVisualization
-        width: Math.min(parent.width, parent.height) * 0.8
+        width: parent.width - creationView.width
         height: width
-        anchors.centerIn: parent
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.left: parent.left
         breathTaken: breathingSimulation.breathTaken
 
         BreathTextVisualization {
@@ -51,5 +52,12 @@ Item {
                 }
             }
         }
+    }
+
+    ScenarioCreationView {
+        id: creationView
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
     }
 }
