@@ -49,7 +49,7 @@ ApplicationWindow {
             anchors.fill: parent
 
             ItemDelegate {
-                text: qsTr("Settings")
+                text: qsTr("Setup")
                 width: parent.width
                 onClicked: {
                     stackView.push("views/SettingsView.qml")

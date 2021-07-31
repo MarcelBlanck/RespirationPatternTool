@@ -5,83 +5,42 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
 import Qt.labs.qmlmodels 1.0
 
+import "../elements"
+
 Item {
     id: root
 
-    readonly property alias scenarioName: scenarioNameEntry.text
-    readonly property alias scenarioLoopingForever: scenarioLoopForeverSwitch.checked
-
     width: 400
 
-    Column {
-        id: scenarioHeader
-        Text {
-            id: title
-            anchors.left: parent.left
-            anchors.right: parent.right
-            text: qsTr("Create a Scenario")
-            color: "white"
-        }
+    SettingsHeader {
+        id: header
 
-        TextEdit {
-            id: scenarioNameEntry
-            anchors.left: parent.left
-            anchors.right: parent.right
-            text: "Scenario Name"
-            color: "white"
-        }
-
-        Switch {
-            id: scenarioLoopForeverSwitch
-            anchors.left: parent.left
-            text: qsTr("Loop forever")
-            checked: false
-        }
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        settingsRef: settings
     }
 
     ListView {
-        anchors.top: scenarioHeader.bottom
+        anchors.top: header.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-        model: phasesModel
+        model: settings.phasesModel
         spacing: 6
         clip: true
         delegate: DelegateChooser {
             role: "type"
+
             DelegateChoice {
                 roleValue: "phase"
                 delegate: phaseCard
             }
+
             DelegateChoice {
                 roleValue: "add"
                 delegate: addPhaseButton
             }
-        }
-    }
-
-    ListModel {
-        id: phasesModel
-        ListElement {
-            type: "phase"
-            rpm: 12
-            times: 12
-            breathInQuota: 0.5
-        }
-        ListElement {
-            type: "phase"
-            rpm: 15
-            times: 60
-            breathInQuota: 0.3
-        }
-        ListElement {
-            type: "phase"
-            rpm: 18
-            times: 36
-            breathInQuota: 0.5
-        }
-        ListElement {
-            type: "add"
         }
     }
 
@@ -145,6 +104,14 @@ Item {
 
                 Column {
                     Button {
+                        text: "Up"
+                        onClicked: {
+                            if (index > 0) {
+                                settings.phasesModel.move(index, index - 1, 1);
+                            }
+                        }
+                    }
+                    Button {
                         text: "Del"
                         onClicked: {
                             deleteYesNoPopup.indexToDelete = index;
@@ -152,18 +119,10 @@ Item {
                         }
                     }
                     Button {
-                        text: "Up"
-                        onClicked: {
-                            if (index > 0) {
-                                phasesModel.move(index, index - 1, 1);
-                            }
-                        }
-                    }
-                    Button {
                         text: "Down"
                         onClicked: {
-                            if (index < phasesModel.count - 2) {
-                                phasesModel.move(index, index + 1, 1);
+                            if (index < settings.phasesModel.count - 2) {
+                                settings.phasesModel.move(index, index + 1, 1);
                             }
                         }
                     }
@@ -178,7 +137,7 @@ Item {
         informativeText: qsTr("Do you want to delete this item?")
         standardButtons: StandardButton.No | StandardButton.Yes
         onYes: {
-            phasesModel.remove(indexToDelete);
+            settings.phasesModel.remove(indexToDelete);
         }
     }
 
@@ -190,14 +149,10 @@ Item {
             Button {
                 text: qsTr("Add")
                 onClicked: {
-                    phasesModel.insert(
-                        phasesModel.count - 2,
-                        {
-                            type: "phase",
-                            rpm: 14,
-                            times: 14,
-                            breathInQuota: 0.5
-                        }
+                    // TODO add addPhase function to settings
+                    settings.phasesModel.insert(
+                        settings.phasesModel.count - 1,
+                        settings.defaultPhase
                     );
                 }
             }

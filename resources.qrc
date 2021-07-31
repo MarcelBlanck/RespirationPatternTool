@@ -9,9 +9,11 @@
         <file>src/qml/elements/BreathVolumeVisualization.qml</file>
         <file>src/qml/views/BreathingFacilitatorView.qml</file>
         <file>src/qml/views/ScenarioCreationView.qml</file>
-        <file>src/qml/views/SettingsView.qml</file>
         <file>src/qml/main.qml</file>
         <file>src/qml/data/Settings.qml</file>
         <file>qtquickcontrols2.conf</file>
+        <file>src/qml/elements/LabeledSwitch.qml</file>
+        <file>src/qml/elements/SettingsHeader.qml</file>
+        <file>src/qml/elements/SettingsStorageControl.qml</file>
     </qresource>
 </RCC>
