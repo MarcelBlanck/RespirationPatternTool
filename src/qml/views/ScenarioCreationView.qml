@@ -10,6 +10,8 @@ import "../elements"
 Item {
     id: root
 
+    property var settings
+
     width: 400
 
     SettingsHeader {
@@ -18,7 +20,7 @@ Item {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        settingsRef: settings
+        settings: root.settings
     }
 
     ListView {

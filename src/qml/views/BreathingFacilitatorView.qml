@@ -9,6 +9,8 @@ import "../elements"
 Item {
     id: root
 
+    property var settings
+
     BreathingSimulation {
         id: breathingSimulation
     }
@@ -21,10 +23,9 @@ Item {
 
     BreathVolumeVisualization {
         id: breathVolumeVisualization
-        width: parent.width - creationView.width
+        width: Math.min(parent.width, parent.height) - 10
         height: width
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
+        anchors.centerIn: parent
         breathTaken: breathingSimulation.breathTaken
 
         BreathTextVisualization {
@@ -52,12 +53,5 @@ Item {
                 }
             }
         }
-    }
-
-    ScenarioCreationView {
-        id: creationView
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
-        anchors.right: parent.right
     }
 }

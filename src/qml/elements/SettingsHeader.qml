@@ -5,7 +5,7 @@ Column {
     id: root
 
 
-    property var settingsRef
+    property var settings
 
     anchors.top: parent.top
     anchors.left: parent.left
@@ -35,6 +35,6 @@ Column {
 
     SettingsStorageControl {
         width: parent.width
-        settingsRef: root.settingsRef
+        settings: root.settings
     }
 }

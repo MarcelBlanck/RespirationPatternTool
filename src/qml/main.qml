@@ -1,67 +1,87 @@
 import QtQuick 2.12
-import QtQuick.Controls 2.5
+import QtQuick.Controls 2.12
+import QtQuick.Layouts 1.12
 
 import "./data"
+import "./views"
 
 ApplicationWindow {
-
     id: window
+
+    readonly property string gearIconUnicode: "\u2699"
+    readonly property string backIconUnicode: "\u25C0"
+    readonly property string infoIconUnicode: "\uD83D\uDEC8"
+    readonly property real iconPixelSize: Qt.application.font.pixelSize * 1.6
+
     width: 800
     height: 600
     minimumHeight: 600
     minimumWidth: 800
 
     visible: true
-    title: qsTr("Stack")
 
     header: ToolBar {
-        contentHeight: toolButton.implicitHeight
+        contentWidth: window.width
+        contentHeight: settingsButton.implicitHeight
 
-        ToolButton {
-            id: toolButton
-            text: stackView.depth > 1 ? "\u25C0" : "\u2630"
-            font.pixelSize: Qt.application.font.pixelSize * 1.6
-            onClicked: {
-                if (stackView.depth > 1) {
-                    stackView.pop()
-                } else {
-                    drawer.open()
+        RowLayout {
+            width: parent.width
+            ToolButton {
+                id: settingsButton
+                text: stackView.depth > 1 ? backIconUnicode : gearIconUnicode
+                font.pixelSize: iconPixelSize
+                onClicked: {
+                    if (stackView.depth > 1) {
+                        stackView.pop();
+                    } else {
+                        drawer.open();
+                    }
                 }
             }
-        }
 
-        Label {
-            text: qsTr("Respiration Pattern Tool")
-            anchors.centerIn: parent
+            Label {
+                Layout.fillWidth: true
+                verticalAlignment: Label.AlignVCenter
+                text: qsTr("Respiration Pattern Tool")
+            }
+
+            ToolButton {
+                id: infoButton
+                text: infoIconUnicode
+                font.pixelSize: iconPixelSize
+                onClicked: {
+                    stackView.push("views/InfoView.qml");
+                    drawer.close();
+                }
+            }
         }
     }
 
     Settings {
-        id: settings
+        id: globalSettings
     }
 
     Drawer {
         id: drawer
-        width: window.width * 0.66
+        width: scenarioCreationView.width + 2 * scenarioCreationView.anchors.margins
         height: window.height
 
-        Column {
-            anchors.fill: parent
-
-            ItemDelegate {
-                text: qsTr("Setup")
-                width: parent.width
-                onClicked: {
-                    stackView.push("views/SettingsView.qml")
-                    drawer.close()
-                }
-            }
+        ScenarioCreationView {
+            id: scenarioCreationView
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.margins: 10
+            settings: globalSettings
         }
     }
 
     StackView {
         id: stackView
-        initialItem: "views/BreathingFacilitatorView.qml"
         anchors.fill: parent
+        Component.onCompleted: stackView.push(
+                                   Qt.resolvedUrl("views/BreathingFacilitatorView.qml"),
+                                   {settings: globalSettings}
+                               );
     }
 }

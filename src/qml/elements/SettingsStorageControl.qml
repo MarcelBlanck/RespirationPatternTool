@@ -8,7 +8,7 @@ import "../data"
 Item {
     id: root
 
-    property var settingsRef
+    property var settings
 
     height: buttonRow.height
 
@@ -39,7 +39,7 @@ Item {
             var request = new XMLHttpRequest();
             request.open("GET", openFileDialog.fileUrl, false);
             request.send(null);
-            root.settingsRef.loadFromJson(request.responseText);
+            root.settings.loadFromJson(request.responseText);
         }
     }
 
@@ -51,7 +51,7 @@ Item {
             // TODO error popups for request.status
             var request = new XMLHttpRequest();
             request.open("PUT", saveFileDialog.fileUrl, false);
-            request.send(root.settingsRef.convertToJson());
+            request.send(root.settings.convertToJson());
         }
     }
 }

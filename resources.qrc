@@ -15,5 +15,6 @@
         <file>src/qml/elements/LabeledSwitch.qml</file>
         <file>src/qml/elements/SettingsHeader.qml</file>
         <file>src/qml/elements/SettingsStorageControl.qml</file>
+        <file>src/qml/views/InfoView.qml</file>
     </qresource>
 </RCC>
