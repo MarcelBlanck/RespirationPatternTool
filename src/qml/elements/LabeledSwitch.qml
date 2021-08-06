@@ -18,9 +18,5 @@ Item {
     Switch {
         id: switchControl
         anchors.right: parent.right
-        checked: settings.soundOn
-        onCheckedChanged: {
-            settings.soundOn = checked;
-        }
     }
 }

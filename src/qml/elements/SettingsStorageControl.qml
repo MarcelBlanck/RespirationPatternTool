@@ -28,12 +28,18 @@ Item {
             text: qsTr("Save")
             onClicked: saveFileDialog.open();
         }
+        Button {
+            Layout.fillWidth: true
+            text: qsTr("Default")
+            onClicked: settings.setToDefault();
+        }
     }
 
     FileDialog {
         id: openFileDialog
 
         nameFilters: ["Respiration Pattern Tool Data files (*.rptd)"]
+        selectExisting: true
         onAccepted: {
             // TODO error popups for request.status
             var request = new XMLHttpRequest();
@@ -47,10 +53,11 @@ Item {
         id: saveFileDialog
 
         nameFilters: ["Respiration Pattern Tool Data (*.rptd), All files (*)"]
+        selectExisting: false
         onAccepted: {
             // TODO error popups for request.status
             var request = new XMLHttpRequest();
-            request.open("PUT", saveFileDialog.fileUrl, false);
+            request.open("PUT", saveFileDialog.fileUrl, true);
             request.send(root.settings.convertToJson());
         }
     }

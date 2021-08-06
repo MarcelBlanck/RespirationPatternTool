@@ -21,6 +21,14 @@ Item {
     property real breathsPerMinute: 14
     property real breathInFactor: 0.5
 
+    function setToDefault() {
+        soundOn = true;
+        loopForever = true;
+        phasesModel.clear();
+        phasesModel.append(defaultPhase);
+        phasesModel.append({ type: "add" });
+    }
+
     function loadFromJson(json) {
         var settings = JSON.parse(json);
 
@@ -30,8 +38,7 @@ Item {
         // TODO phasesModelList order, data validation, sanification and correction
 
         phasesModel.clear();
-        const phasesModelListCount = settings.phasesModelList.count;
-        console.log("LIST to ", JSON.stringify(settings.phasesModelList), phasesModelListCount);
+        const phasesModelListCount = settings.phasesModelList.length;
         settings.phasesModelList.forEach(listEntry => {
             if (listEntry.type === "phase") {
                 phasesModel.append({
@@ -56,6 +63,7 @@ Item {
         const phaseModelCount = phasesModel.count;
         for (let i = 0; i < phaseModelCount; i++) {
             const modelEntry = phasesModel.get(i);
+            console.log("checking ", JSON.stringify(modelEntry))
             if (modelEntry.type === "phase") {
                 phasesModelList.push({
                     order: i,
@@ -83,4 +91,6 @@ Item {
             type: "add"
         }
     }
+
+    Component.onCompleted: setToDefault();
 }

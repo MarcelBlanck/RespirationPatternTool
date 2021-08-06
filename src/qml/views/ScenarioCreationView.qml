@@ -66,6 +66,9 @@ Item {
                         to: 60
                         stepSize: 1
                         value: rpm
+                        onValueChanged: {
+                            rpm = value;
+                        }
                     }
 
                     SpinBox {
@@ -73,6 +76,9 @@ Item {
                         from: 0
                         to: 1000
                         value: times
+                        onValueChanged: {
+                            times = value;
+                        }
                     }
 
                     Slider {
