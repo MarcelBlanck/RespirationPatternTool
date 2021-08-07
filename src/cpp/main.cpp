@@ -11,8 +11,7 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("marcel-blanck.de");
 
     QQmlApplicationEngine engine;
-    const QUrl url(QStringLiteral("qrc:/src/qml/main.qml"));
-    engine.load(url);
+    engine.load(QUrl(QStringLiteral("qrc:/src/qml/main.qml")));
 
     return app.exec();
 }

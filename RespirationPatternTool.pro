@@ -23,4 +23,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     README.md \
-    qtquickcontrols2.conf
+    .gitignore \
+    qtquickcontrols2.conf \
+    requirements.txt \
+    respiration_pattern_tool.pyproject
+    src/python/respiration_pattern_tool.py

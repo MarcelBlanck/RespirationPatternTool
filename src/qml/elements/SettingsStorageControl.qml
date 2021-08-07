@@ -28,6 +28,7 @@ Item {
             text: qsTr("Save")
             onClicked: saveFileDialog.open();
         }
+
         Button {
             Layout.fillWidth: true
             text: qsTr("Default")

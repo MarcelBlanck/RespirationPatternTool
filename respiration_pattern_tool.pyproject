@@ -1,0 +1,21 @@
+{
+    "files": [
+        "src/python/respiration_pattern_tool.py",
+        "sounds/4390__noisecollector__pongblipf-4.wav",
+        "sounds/4391__noisecollector__pongblipf-5.wav",
+        "src/qml/elements/BreathingSimulation.qml",
+        "src/qml/elements/BreathProgressCircle.qml",
+        "src/qml/elements/BreathSonification.qml",
+        "src/qml/elements/BreathTextVisualization.qml",
+        "src/qml/elements/BreathVolumeVisualization.qml",
+        "src/qml/views/BreathingFacilitatorView.qml",
+        "src/qml/views/ScenarioCreationView.qml",
+        "src/qml/main.qml",
+        "src/qml/data/Settings.qml",
+        "qtquickcontrols2.conf",
+        "src/qml/elements/LabeledSwitch.qml",
+        "src/qml/elements/SettingsHeader.qml",
+        "src/qml/elements/SettingsStorageControl.qml",
+        "src/qml/views/InfoView.qml"
+    ]
+}
