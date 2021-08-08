@@ -16,5 +16,6 @@
         <file>src/qml/elements/SettingsHeader.qml</file>
         <file>src/qml/elements/SettingsStorageControl.qml</file>
         <file>src/qml/views/InfoView.qml</file>
+        <file>src/qml/elements/BreathPhaseProgressView.qml</file>
     </qresource>
 </RCC>

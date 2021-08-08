@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 Item {
     id: root
+
     property real breathTaken: 0.0
     readonly property real innerMargin: 30
     readonly property real centerScale: 0.4
@@ -42,7 +43,5 @@ Item {
             radius: width / 2
             scale: root.centerScale
         }
-
     }
-
 }

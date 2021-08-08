@@ -15,8 +15,8 @@ ApplicationWindow {
 
     width: 800
     height: 600
-    minimumHeight: 600
-    minimumWidth: 800
+    minimumWidth: 500
+    minimumHeight: 500
 
     visible: true
 
@@ -47,6 +47,7 @@ ApplicationWindow {
 
             ToolButton {
                 id: infoButton
+
                 text: infoIconUnicode
                 font.pixelSize: iconPixelSize
                 onClicked: {
@@ -63,8 +64,13 @@ ApplicationWindow {
 
     Drawer {
         id: drawer
+
         width: scenarioCreationView.width + 2 * scenarioCreationView.anchors.margins
         height: window.height
+
+        onAboutToShow: {
+            stackView.currentItem.stop();
+        }
 
         ScenarioCreationView {
             id: scenarioCreationView
@@ -78,10 +84,16 @@ ApplicationWindow {
 
     StackView {
         id: stackView
+
         anchors.fill: parent
-        Component.onCompleted: stackView.push(
-                                   Qt.resolvedUrl("views/BreathingFacilitatorView.qml"),
-                                   {settings: globalSettings}
-                               );
+
+        Component.onCompleted: {
+            stackView.push(
+                Qt.resolvedUrl("views/BreathingFacilitatorView.qml"),
+                {
+                    settings: globalSettings
+                }
+            );
+        }
     }
 }

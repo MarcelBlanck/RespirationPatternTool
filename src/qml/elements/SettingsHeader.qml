@@ -4,12 +4,7 @@ import QtQuick.Controls 2.12
 Column {
     id: root
 
-
     property var settings
-
-    anchors.top: parent.top
-    anchors.left: parent.left
-    anchors.right: parent.right
 
     Label {
         text: qsTr("Settings")

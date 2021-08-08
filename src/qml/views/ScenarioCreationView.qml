@@ -24,6 +24,7 @@ Item {
     }
 
     ListView {
+        id: phaseListView
         anchors.top: header.bottom
         anchors.left: parent.left
         anchors.right: parent.right
@@ -94,14 +95,14 @@ Item {
 
                 Column {
                     Label {
-                        text: rpmBox.value + " " + qsTr("rpm")
+                        text: rpm + " " + qsTr("rpm")
                     }
                     Label {
-                        text: respirationCountBox.value + " " + qsTr("times")
+                        text: times + " " + qsTr("times")
                     }
                     Label {
                         readonly property real durationInTwoDigitS: {
-                            return Math.round(respirationCountBox.value * 60 / rpmBox.value * 100) / 100;
+                            return Math.round(times * 60 / rpm * 100) / 100;
                         }
                         text: durationInTwoDigitS + " " + qsTr("s")
                     }
@@ -158,10 +159,15 @@ Item {
                 text: qsTr("Add")
                 onClicked: {
                     // TODO add addPhase function to settings
+                    const lastIndex = settings.phasesModel.count - 1;
                     settings.phasesModel.insert(
-                        settings.phasesModel.count - 1,
+                        lastIndex,
                         settings.defaultPhase
                     );
+                    Qt.callLater(() => {
+                        const lastIndex = settings.phasesModel.count - 1;
+                        phaseListView.positionViewAtIndex(lastIndex, ListView.End);
+                    });
                 }
             }
         }

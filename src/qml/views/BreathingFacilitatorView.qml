@@ -11,6 +11,10 @@ Item {
 
     property var settings
 
+    function stop() {
+        breathingSimulation.softStop();
+    }
+
     BreathingSimulation {
         id: breathingSimulation
     }
@@ -21,37 +25,80 @@ Item {
         breathCyclePosition: breathingSimulation.breathCyclePosition
     }
 
-    BreathVolumeVisualization {
-        id: breathVolumeVisualization
-        width: Math.min(parent.width, parent.height) - 10
-        height: width
-        anchors.centerIn: parent
-        breathTaken: breathingSimulation.breathTaken
+    Item {
+        id: breathVolumeVisualizationArea
 
-        BreathTextVisualization {
-            id: breathTextVisualization
+        anchors.left: parent.left
+        anchors.right: breathPhaseProgressView.left
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+
+        BreathVolumeVisualization {
+            id: breathVolumeVisualization
+
+            height: Math.min(parent.width-40, parent.height - 40)
+            width: height
             anchors.centerIn: parent
-            automaticVisualizationActive: breathingSimulation.animationRunning
-            breathInFactor: breathingSimulation.breathInFactor
-            breathCyclePosition: breathingSimulation.breathCyclePosition
-        }
+            breathTaken: breathingSimulation.breathTaken
 
-        BreathProgressCircle {
-            anchors.fill: parent
+            BreathTextVisualization {
+                id: breathTextVisualization
 
-            breathInFactor: breathingSimulation.breathInFactor
-            breathCyclePosition: breathingSimulation.breathCyclePosition
-        }
+                anchors.centerIn: parent
+                automaticVisualizationActive: breathingSimulation.animationRunning
+                breathInFactor: breathingSimulation.breathInFactor
+                breathCyclePosition: breathingSimulation.breathCyclePosition
+            }
 
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                if (breathingSimulation.animationRunning) {
-                    breathingSimulation.softStop();
-                } else {
-                    breathingSimulation.start();
+            BreathProgressCircle {
+                anchors.fill: parent
+                breathInFactor: breathingSimulation.breathInFactor
+                breathCyclePosition: breathingSimulation.breathCyclePosition
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    if (breathingSimulation.animationRunning) {
+                        breathingSimulation.softStop();
+                    } else {
+                        breathingSimulation.start();
+                    }
                 }
             }
         }
     }
+
+    BreathPhaseProgressView {
+        id: breathPhaseProgressView
+
+        width: 200
+        height: 150
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.margins: 20
+        settings: root.settings
+    }
+
+    state: width >= height ? "" : "phaseProgressBelow"
+
+    states: [
+        State {
+            name: "phaseProgressBelow"
+            AnchorChanges {
+                target: breathPhaseProgressView
+                anchors.right: undefined
+                anchors.verticalCenter: undefined
+                anchors.bottom: root.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+            AnchorChanges {
+                target: breathVolumeVisualizationArea
+                anchors.left: root.left
+                anchors.right: root.right
+                anchors.top: parent.top
+                anchors.bottom: breathPhaseProgressView.top
+            }
+        }
+    ]
 }
