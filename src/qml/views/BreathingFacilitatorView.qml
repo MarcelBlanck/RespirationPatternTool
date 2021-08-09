@@ -77,7 +77,7 @@ Item {
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: 20
-        settings: root.settings
+        //settings: root.settings
     }
 
     state: width >= height ? "" : "phaseProgressBelow"
